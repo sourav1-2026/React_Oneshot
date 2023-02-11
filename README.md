@@ -32,3 +32,37 @@ for inline css sometime we have to pass js object in style parameter .
 ex:<div style={{ backgroundColor:'grey'}}>React -js tutorial</div>
 {}---> use to access the variable
 
+
+Props:"props" (short for properties) are a way of passing data from a parent component to its child components. Props are used to make a component more dynamic and reusable.
+
+ex: 
+1)
+function WelcomeMessage(props) {
+  return <h1>Hello, {props.name}!</h1>;
+}
+
+function App() {
+  return <WelcomeMessage name="John" />;
+}
+2) 
+app.js
+    Video title="React-js tutorial"></Video>
+
+
+video.js
+     // function Video(props) {
+//     console.log(props)
+//   return (
+//     <>
+//       <img src="https://picsum.photos/240/120" alt="Katherine Johnson" />
+//       <div style={{ backgroundColor:'grey'}}>{props.title}</div>
+//     </>
+//   );
+// }
+
+we can do all of the thing with the help of props that is feasible done with css attributes.
+
+
+
+
+
