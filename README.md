@@ -9,3 +9,26 @@ ans:
 
 
 
+In React from function we return UI/UX.
+we use the function as a tag. Supoose we make a function with the name App then we use the function as <App />
+keep in mind when we import any function make sure the first letter in uppercase.
+
+
+
+Fragment :  a "fragment" is a way to group a set of children elements together without adding any extra DOM nodes to the DOM tree.
+function MyComponent() {
+  return (
+    <div>
+      <div>First div</div>
+      <div>Second div</div>
+    </div>
+  );
+}
+
+
+when you want to use inline Css and inline js then use Cample Case convention. for example class====className 
+
+for inline css sometime we have to pass js object in style parameter .
+ex:<div style={{ backgroundColor:'grey'}}>React -js tutorial</div>
+{}---> use to access the variable
+
