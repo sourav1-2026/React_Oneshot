@@ -45,6 +45,7 @@ function App() {
   return <WelcomeMessage name="John" />;
 }
 2) 
+
 app.js
     Video title="React-js tutorial"></Video>
 
@@ -64,5 +65,59 @@ we can do all of the thing with the help of props that is feasible done with css
 
 
 
+Conditional rendering:
+--------------------------
 
+function Video({ title, channel, views, time,children }) {
+  let verified=true;
+  let channelJsx=<div className="channel">{channel} ✅</div>;
+  // in react jsx can be store in a js varable and we can access it inside the function with {}.
+  return (
+    <>
+      <div className="container">
+        <div>
+        <img />
+        </div>
+        <div className="title">{title}</div>
+        {/* <div className="channel">{channel} ✅</div> */}
+        {channelJsx}
+        <div className="children">{children}</div>
+        <div className="views">
+          {views}
+          views <span>.</span> {time}
+        </div>
+      </div>
+    </>
+
+short circuit and ternery opertaor:
+-----------------------------------
+ return (
+    <>
+      <div className="container">
+        <div>
+        <img src={``} alt="Katherine Johnson" />
+        </div>
+        <div className="title">{title}</div>
+        {/* <div className="channel">{channel} ✅</div> */}
+        {/* {channelJsx} */}
+
+        {/* {verified ?<div className="channel">{channel} ✅</div> :<div className="channel">{channel} </div>} */}
+
+        {/* <div className="channel">{channel} {verified ? '✅' :null}</div> */}
+        {/* here we are appliying terney operator only on the green tick because in previous case code get copy more */}
+
+        <div className="channel">{channel} {verified && '✅'}</div>
+        {/* this concept is know as a short circuit */}
+
+        <div className="children">{children}</div>
+        <div className="views">
+          {views}
+          views <span>.</span> {time}
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default Video;
 
