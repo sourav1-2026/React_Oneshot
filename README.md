@@ -121,3 +121,14 @@ short circuit and ternery opertaor:
 
 export default Video;
 
+
+Hooks:
+------
+
+useState: const [stateVariable, setStateVariable] = useState(initialValue);
+
+we are using const because:
+--------------------------
+Using const ensures that the variables cannot be reassigned, providing better protection against accidental modifications. This is especially important when dealing with state in React, as any unintended modifications to state can lead to unexpected behavior and bugs in your application.
+
+

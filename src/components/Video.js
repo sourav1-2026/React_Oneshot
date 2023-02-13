@@ -12,6 +12,8 @@ import "./Video.css"
 // The below code is also work as same here the only difference is that here we use Destructuring concept used in modern day.
 
 function Video({ title, channel, views, time,children,verified,id }) {
+
+  console.log("video counter")
   // let verified=true;
   // let channelJsx;
   // if (verified){

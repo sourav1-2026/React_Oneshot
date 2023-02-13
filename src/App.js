@@ -1,9 +1,15 @@
 import "./App.css";
 import PlayButton from "./components/PlayButton";
+import Counter from "./components/Counter";
 import Video from "./components/Video";
-import videos from "./data/data";
+import videoDB from "./data/data";
+import { useState } from "react";
 // import {Video,thum } "./components/Video"
 function App() {
+
+  console.log("app counter")
+  const [videos,setVideos]=useState(videoDB)
+
   // let obj={
   //   title:"React-js tutorial" ,
   //   views:"10K",
@@ -14,7 +20,18 @@ function App() {
 
   return (
     <div className="App" onClick={()=>console.log("app")}>
-      hello
+      <div>
+        <button onClick={()=>{
+          setVideos([...videos,{
+            id:videos.length+1,
+            title: 'Demo tutorial',
+            views: '1M',
+            time: '1 month ago',
+            channel: 'Coder Dost',
+            verified: true
+          }]);
+        }}>Add video</button>
+      </div>
       <br></br>
       {/* <Video {...obj}> <p>This is some content passed as children to Video.js</p></Video> */}
       {/* prop destructue */}
@@ -40,6 +57,7 @@ function App() {
           </Video>
         ))}
       </div>
+      <Counter></Counter>
       {/* here i used higher order function such as map and arrow function
       2) arrow function return jsx  */}
       {/* <div className="PlayButton"> */}
