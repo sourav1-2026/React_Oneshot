@@ -3,6 +3,7 @@
     margin: 0 0.8em;
     /* float: left; */
     /* border: 2px solid green; */
+    position: relative;
 }
 
 .pic img{
@@ -22,3 +23,19 @@
   .views span{
     padding: 0 0.5em;
   }
+  
+.close{
+  position: absolute;
+  right: 149.5px;
+  height: 38.2px;
+}
+
+.edit{
+  position: absolute;
+  right: 242.5px;
+  height: 33.2px;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

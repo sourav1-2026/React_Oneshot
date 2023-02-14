@@ -131,4 +131,51 @@ we are using const because:
 --------------------------
 Using const ensures that the variables cannot be reassigned, providing better protection against accidental modifications. This is especially important when dealing with state in React, as any unintended modifications to state can lead to unexpected behavior and bugs in your application.
 
+React does not allows us to change the actual value in useState insted it told us to make a copy of it and then update.
+ const [videos,setVideos]=useState(videoDB)
+<button onClick={()=>{
+          setVideos([...videos,{
+            id:videos.length+1,
+            title: 'Demo tutorial',
+            views: '1M',
+            time: '1 month ago',
+            channel: 'Coder Dost',
+            verified: true
+          }]);
+        }}>Add video</button>
 
+
+Forms , event objects,Lifting state:
+-------------------------------------
+event objects:
+---------------
+When an event occurs in a React component, an event object is created and passed to the event handler function, allowing you to access information about the event, such as the type of event, the target element, the time the event occurred, and more.
+
+
+Lifting state:
+--------------
+In React, "lifting state up" refers to the process of moving state from a child component to a common ancestor component, so that the state can be shared and managed by the ancestor component. This pattern is useful when you have multiple child components that need access to the same state, as it allows you to centralize the state management and avoid duplication.
+
+
+
+Handlesbmit:
+
+onchange:handlechange
+ function handleChange(e){
+        console.log(e.target.value,e.target.name)
+        setVideo({ ...video, [e.target.name]: e.target.value });
+    }
+
+
+***
+
+we can pass custome event as props
+we can pass setVideos function as a props
+
+
+
+spread operator:
+------------------
+
+sending to siblings:
+---------------------

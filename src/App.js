@@ -1,80 +1,52 @@
 import "./App.css";
-import PlayButton from "./components/PlayButton";
-import Counter from "./components/Counter";
-import Video from "./components/Video";
 import videoDB from "./data/data";
 import { useState } from "react";
-// import {Video,thum } "./components/Video"
+import AddVideo from "./components/AddVideo";
+import VideoList from "./components/VideoList";
 function App() {
 
-  console.log("app counter")
+  const [editablevideo,setEditablevideo]=useState(null)
+  function addVideos(video){
+    console.log("app wala addvideo")
+    setVideos([
+          ...videos,
+          {...video, id:videos.length+1}
+        ]);
+  }
+
+  function deleteVideo(id){
+    // console.log(id)
+    setVideos(videos.filter(video=>video.id!==id))
+    
+  }
+
+
+  // console.log("app counter")
   const [videos,setVideos]=useState(videoDB)
 
-  // let obj={
-  //   title:"React-js tutorial" ,
-  //   views:"10K",
-  //   time:"1 month ago",
-  //   channel:"react sikho",
-  //   verified:true
-  // }
+  function updateVideo(id){
+    console.log(id)
+    console.log("updated")
+    setEditablevideo(videos.find(video=>video.id===id))
+    console.log(editablevideo)
+
+  }
+
+  function editVideo(video){
+    console.log(video)
+    const index=videos.findIndex(v=>v.id===video.id)
+    const newVideos=[...videos]
+    newVideos.splice(index,1,video)
+    setVideos(newVideos)
+  }
 
   return (
     <div className="App" onClick={()=>console.log("app")}>
-      <div>
-        <button onClick={()=>{
-          setVideos([...videos,{
-            id:videos.length+1,
-            title: 'Demo tutorial',
-            views: '1M',
-            time: '1 month ago',
-            channel: 'Coder Dost',
-            verified: true
-          }]);
-        }}>Add video</button>
-      </div>
+      <AddVideo addVideos={addVideos} editablevideo={editablevideo} editVideo={editVideo} ></AddVideo>
       <br></br>
-      {/* <Video {...obj}> <p>This is some content passed as children to Video.js</p></Video> */}
-      {/* prop destructue */}
-      {/* <Video verified={false} title="Node -js tutorial" views="100K" time="1 year ago" channel="react sikho"></Video>
-    <Video verified={true}  title="MongoDb tutorial" views="1M" time="2 month ago" channel="Mongo sikho"></Video> */}
-      <div className="video">
-        {videos.map((video) => (
-          <Video
-            key={video.id}
-            verified={video.verified}
-            title={video.title}
-            views={video.views}
-            time={video.time}
-            channel={video.channel}
-            id={video.id}
-          >
-            <PlayButton
-              onPlay={() => console.log("playing",video.title)}
-              onPause={() => console.log("paused..",video.title)}
-            >
-              {video.title}
-            </PlayButton>
-          </Video>
-        ))}
-      </div>
-      <Counter></Counter>
-      {/* here i used higher order function such as map and arrow function
-      2) arrow function return jsx  */}
-      {/* <div className="PlayButton"> */}
-        {/* <PlayButton name="play" message="hii"></PlayButton>
-        <PlayButton name="pause" message="hello"></PlayButton> */}
-
-        {/* <PlayButton
-          message="hii"
-          onPlay={() => console.log("playing")}
-          onPause={() => console.log("pause")}
-        >
-          Play
-        </PlayButton> */}
-        {/* <PlayButton  message="hello" onClick={()=>alert("pause")}>pause</PlayButton> */}
-
-        {/* when you are passing functions in props make sure on that place you only declare that function
-      </div> */}
+      <VideoList deleteVideo={deleteVideo} updateVideo={updateVideo} videos={videos}></VideoList>
+      
+     
     </div>
   );
 }
