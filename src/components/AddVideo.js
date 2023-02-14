@@ -8,18 +8,17 @@ const initialstate={
     view:''
 }
 
-function AddVideo({addVideos,editVideo,editablevideo}) {
+function AddVideo({dispatch,editablevideo}) {
 
     const [video,setVideo]=useState(initialstate)
 
     function handleSubmit(e){
         e.preventDefault();  // when we submt the form the page get reload to restrict this thing we use it.
         if  (editablevideo){
-          editVideo(video)
+          dispatch({type:'UPDATE',payload:video})
         }
-        else{
-         
-          addVideos(video);
+        else{        
+          dispatch({type:'ADD',payload:video})
         }
        
         setVideo(initialstate)
@@ -30,9 +29,7 @@ function AddVideo({addVideos,editVideo,editablevideo}) {
     }
 
     function handleChange(e){
-        // console.log(e.target.value,e.target.name)
         setVideo({ ...video, [e.target.name]: e.target.value });
-        // console.log(video)
     }
 
     useEffect(()=>{

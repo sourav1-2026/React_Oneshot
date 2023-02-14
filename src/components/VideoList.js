@@ -1,7 +1,7 @@
 import Video from "./Video";
 import PlayButton from "./PlayButton";
 
-function VideoList({videos,deleteVideo,updateVideo}) {
+function VideoList({videos,dispatch,updateVideo}) {
   return (
     <div className="video">
       {videos.map((video) => (
@@ -13,7 +13,7 @@ function VideoList({videos,deleteVideo,updateVideo}) {
           time={video.time}
           channel={video.channel}
           id={video.id}
-          deleteVideo={deleteVideo}
+          dispatch={dispatch}
           updateVideo={updateVideo}
         >
           <PlayButton

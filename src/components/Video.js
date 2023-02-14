@@ -1,14 +1,14 @@
 import "./Video.css"
 
 
-function Video({ title, channel, views, time,children,verified,id,deleteVideo,updateVideo }) {
+function Video({ title, channel, views, time,children,verified,id,dispatch,updateVideo }) {
 
-  // console.log("video counter")
+
 
   return (
     <>
       <div className="container">
-        <button className="close" onClick={()=>{deleteVideo(id)}}>X</button>
+        <button className="close" onClick={()=>{dispatch({type:'DELETE',payload:id})}}>X</button>
         <button className="edit" onClick={()=>{updateVideo(id)}}>Update</button>
         <div>
         <img src={`https://picsum.photos/id/${id}/160/90`} alt="Katherine Johnson" />

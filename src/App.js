@@ -1,50 +1,43 @@
 import "./App.css";
 import videoDB from "./data/data";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import AddVideo from "./components/AddVideo";
 import VideoList from "./components/VideoList";
+
+
 function App() {
-
   const [editablevideo,setEditablevideo]=useState(null)
-  function addVideos(video){
-    console.log("app wala addvideo")
-    setVideos([
-          ...videos,
-          {...video, id:videos.length+1}
-        ]);
+  function videoReducer(videos,action){
+    switch(action.type){
+      case 'ADD':
+        return [
+                ...videos,
+                {...action.payload, id:videos.length+1}
+              ]
+      case 'DELETE':
+        return videos.filter(video=>video.id!==action.payload)
+      case 'UPDATE':
+        const index=videos.findIndex(v=>v.id===action.payload.id)
+        const newVideos=[...videos]
+        newVideos.splice(index,1,action.payload)
+        setEditablevideo(null);
+        return newVideos
+
+      default: 
+        return videos
+    }
   }
 
-  function deleteVideo(id){
-    // console.log(id)
-    setVideos(videos.filter(video=>video.id!==id))
-    
-  }
-
-
-  // console.log("app counter")
-  const [videos,setVideos]=useState(videoDB)
-
-  function updateVideo(id){
-    console.log(id)
-    console.log("updated")
+  const[videos,dispatch]=useReducer(videoReducer,videoDB)
+  function updateVideo(id){   
     setEditablevideo(videos.find(video=>video.id===id))
-    console.log(editablevideo)
-
   }
-
-  function editVideo(video){
-    console.log(video)
-    const index=videos.findIndex(v=>v.id===video.id)
-    const newVideos=[...videos]
-    newVideos.splice(index,1,video)
-    setVideos(newVideos)
-  }
-
+ 
   return (
     <div className="App" onClick={()=>console.log("app")}>
-      <AddVideo addVideos={addVideos} editablevideo={editablevideo} editVideo={editVideo} ></AddVideo>
+      <AddVideo dispatch={dispatch} editablevideo={editablevideo} ></AddVideo>
       <br></br>
-      <VideoList deleteVideo={deleteVideo} updateVideo={updateVideo} videos={videos}></VideoList>
+      <VideoList dispatch={dispatch} updateVideo={updateVideo} videos={videos}></VideoList>
       
      
     </div>
