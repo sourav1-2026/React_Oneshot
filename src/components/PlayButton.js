@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import ThemeContext from '../context/Themecontext';
 import './PlayButton.css';
 function PlayButton({children,onPlay,onPause}){
     // let playingStatus=false
 
     console.log("playButton counter")
+    const theme=useContext(ThemeContext)
     const [playingStatus,setplayingStatus]=useState(false)
     function handleClick(e){
         console.log(e)
@@ -16,7 +18,7 @@ function PlayButton({children,onPlay,onPause}){
     }
     return (
         // <button onClick={()=>console.log('play')}>Play</button>
-        <button onClick={handleClick}>{children} {playingStatus?'||' : '>'}</button>
+        <button className={theme} onClick={handleClick}>{children} {playingStatus?'||' : '>'}</button>
 
         // react does not want that any variable change the DOM directly
         // that's why concept of state comes into picture

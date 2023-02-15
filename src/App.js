@@ -1,12 +1,22 @@
 import "./App.css";
 import videoDB from "./data/data";
+// import { useContext, useReducer, useState } from "react";
 import { useReducer, useState } from "react";
 import AddVideo from "./components/AddVideo";
 import VideoList from "./components/VideoList";
+import ThemeContext from "./context/Themecontext";
 
 
 function App() {
   const [editablevideo,setEditablevideo]=useState(null)
+
+  // use uf useReducer 
+  const[videos,dispatch]=useReducer(videoReducer,videoDB)
+
+  // use of context
+  const [mode,setMode]=useState('darkMode')
+
+
   function videoReducer(videos,action){
     switch(action.type){
       case 'ADD':
@@ -28,19 +38,26 @@ function App() {
     }
   }
 
-  const[videos,dispatch]=useReducer(videoReducer,videoDB)
-  function updateVideo(id){   
+//  const themeContext=useContext(ThemeContext)
+//  console.log(themeContext)
+
+
+  function updateVideo(id){       
     setEditablevideo(videos.find(video=>video.id===id))
   }
  
   return (
-    <div className="App" onClick={()=>console.log("app")}>
+    <ThemeContext.Provider value={mode}>
+    {/* <div className={`App ${themeContext}`} onClick={()=>console.log("app")}> */}
+    <div className={`App ${mode}`} onClick={()=>console.log("app")}>
+      <button onClick={()=>setMode(mode==='darkMode'? 'lightMode':'darkMode')}>Mode</button>
       <AddVideo dispatch={dispatch} editablevideo={editablevideo} ></AddVideo>
       <br></br>
       <VideoList dispatch={dispatch} updateVideo={updateVideo} videos={videos}></VideoList>
       
      
     </div>
+    </ThemeContext.Provider>
   );
 }
 
