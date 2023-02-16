@@ -1,7 +1,14 @@
 import Video from "./Video";
 import PlayButton from "./PlayButton";
+// import { useContext } from "react";
+import useVideos from "../hooks/Video";
+// import VideosContext from "../context/VideosContext";
 
-function VideoList({videos,dispatch,updateVideo}) {
+
+function VideoList({updateVideo}) {
+
+  // const videos=useContext(VideosContext)
+  const videos=useVideos()
   return (
     <div className="video">
       {videos.map((video) => (
@@ -13,7 +20,6 @@ function VideoList({videos,dispatch,updateVideo}) {
           time={video.time}
           channel={video.channel}
           id={video.id}
-          dispatch={dispatch}
           updateVideo={updateVideo}
         >
           <PlayButton

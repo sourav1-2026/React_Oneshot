@@ -1,11 +1,17 @@
 import { useContext } from "react";
 import ThemeContext from "../context/Themecontext";
 import "./Video.css"
+import useVideoDispatch from "../hooks/VideoDispatch"
+// import VideoDispatchContext from "../context/VideoDispatchContext";
 
+// 6.12.59
 
-function Video({ title, channel, views, time,children,verified,id,dispatch,updateVideo }) {
+function Video({ title, channel, views, time,children,verified,id,updateVideo }) {
 
   const theme=useContext(ThemeContext)
+  // const dispatch=useContext(VideoDispatchContext)
+  const dispatch=useVideoDispatch()
+
   console.log(`video ka ${theme}`)
 
   return (

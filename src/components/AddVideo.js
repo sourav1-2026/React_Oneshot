@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+
+import useVideoDispatch from "../hooks/VideoDispatch";
 
 const initialstate={
     time: "1 month ago",
@@ -8,9 +10,11 @@ const initialstate={
     view:''
 }
 
-function AddVideo({dispatch,editablevideo}) {
+function AddVideo({editablevideo}) {
 
     const [video,setVideo]=useState(initialstate)
+   
+    const dispatch=useVideoDispatch ()
 
     function handleSubmit(e){
         e.preventDefault();  // when we submt the form the page get reload to restrict this thing we use it.

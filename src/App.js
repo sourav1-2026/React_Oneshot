@@ -5,6 +5,8 @@ import { useReducer, useState } from "react";
 import AddVideo from "./components/AddVideo";
 import VideoList from "./components/VideoList";
 import ThemeContext from "./context/Themecontext";
+import VideosContext from "./context/VideosContext";
+import VideoDispatchContext from "./context/VideoDispatchContext";
 
 
 function App() {
@@ -48,15 +50,17 @@ function App() {
  
   return (
     <ThemeContext.Provider value={mode}>
-    {/* <div className={`App ${themeContext}`} onClick={()=>console.log("app")}> */}
+      <VideosContext.Provider value={videos}>
+        <VideoDispatchContext.Provider value={dispatch}>
     <div className={`App ${mode}`} onClick={()=>console.log("app")}>
       <button onClick={()=>setMode(mode==='darkMode'? 'lightMode':'darkMode')}>Mode</button>
-      <AddVideo dispatch={dispatch} editablevideo={editablevideo} ></AddVideo>
+      <AddVideo  editablevideo={editablevideo} ></AddVideo>
+      <VideoList  updateVideo={updateVideo} ></VideoList>
       <br></br>
-      <VideoList dispatch={dispatch} updateVideo={updateVideo} videos={videos}></VideoList>
-      
      
     </div>
+    </VideoDispatchContext.Provider>
+    </VideosContext.Provider>
     </ThemeContext.Provider>
   );
 }
