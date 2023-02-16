@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ThemeContext from "../context/Themecontext";
 import "./Video.css"
 import useVideoDispatch from "../hooks/VideoDispatch"
@@ -12,7 +12,18 @@ function Video({ title, channel, views, time,children,verified,id,updateVideo })
   // const dispatch=useContext(VideoDispatchContext)
   const dispatch=useVideoDispatch()
 
-  console.log(`video ka ${theme}`)
+  // console.log(`video ka ${theme}`)
+
+
+  useEffect(()=>{
+    const idx=setInterval(()=>{
+      console.log("video playing",id)
+    },3000)
+
+    return ()=>{
+      clearInterval(idx)
+    }
+  },[id])
 
   return (
     <>

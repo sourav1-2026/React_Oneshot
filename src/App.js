@@ -1,5 +1,5 @@
 import "./App.css";
-import videoDB from "./data/data";
+// import videoDB from "./data/data";
 // import { useContext, useReducer, useState } from "react";
 import { useReducer, useState } from "react";
 import AddVideo from "./components/AddVideo";
@@ -7,13 +7,15 @@ import VideoList from "./components/VideoList";
 import ThemeContext from "./context/Themecontext";
 import VideosContext from "./context/VideosContext";
 import VideoDispatchContext from "./context/VideoDispatchContext";
+import Counter from "./components/Counter"
 
 
 function App() {
   const [editablevideo,setEditablevideo]=useState(null)
 
   // use uf useReducer 
-  const[videos,dispatch]=useReducer(videoReducer,videoDB)
+  // const[videos,dispatch]=useReducer(videoReducer,videoDB)
+  const[videos,dispatch]=useReducer(videoReducer,[])
 
   // use of context
   const [mode,setMode]=useState('darkMode')
@@ -21,6 +23,9 @@ function App() {
 
   function videoReducer(videos,action){
     switch(action.type){
+      case 'LOAD':
+        return action.payload
+
       case 'ADD':
         return [
                 ...videos,
@@ -53,6 +58,7 @@ function App() {
       <VideosContext.Provider value={videos}>
         <VideoDispatchContext.Provider value={dispatch}>
     <div className={`App ${mode}`} onClick={()=>console.log("app")}>
+      <Counter></Counter>
       <button onClick={()=>setMode(mode==='darkMode'? 'lightMode':'darkMode')}>Mode</button>
       <AddVideo  editablevideo={editablevideo} ></AddVideo>
       <VideoList  updateVideo={updateVideo} ></VideoList>

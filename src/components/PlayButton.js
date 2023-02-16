@@ -1,7 +1,9 @@
-import { useContext, useState } from 'react';
+import { useContext, useState,memo } from 'react';
 import ThemeContext from '../context/Themecontext';
 import './PlayButton.css';
-function PlayButton({children,onPlay,onPause}){
+
+
+const PlayButton=memo(function PlayButton({children,onPlay,onPause}){
     // let playingStatus=false
 
     console.log("playButton counter")
@@ -23,6 +25,6 @@ function PlayButton({children,onPlay,onPause}){
         // react does not want that any variable change the DOM directly
         // that's why concept of state comes into picture
     )
-}
+})
 
 export default PlayButton

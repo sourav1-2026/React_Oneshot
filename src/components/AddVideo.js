@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import useVideoDispatch from "../hooks/VideoDispatch";
 
@@ -15,6 +15,11 @@ function AddVideo({editablevideo}) {
     const [video,setVideo]=useState(initialstate)
    
     const dispatch=useVideoDispatch ()
+
+    const inputRef= useRef(null)  // here we are targeting the title element in the form
+
+    
+ 
 
     function handleSubmit(e){
         e.preventDefault();  // when we submt the form the page get reload to restrict this thing we use it.
@@ -40,12 +45,17 @@ function AddVideo({editablevideo}) {
       console.log('effect')
       if (editablevideo){
         setVideo(editablevideo)
-      }     
+      }  
+
+      // Manipulating the DOM with Refs
+
+      inputRef.current.focus()
+
     },[editablevideo])
 
   return (
     <form>
-      <input type="text" name="title" onChange={handleChange} placeholder="title" value={video.title} />
+      <input ref={inputRef} type="text" name="title" onChange={handleChange} placeholder="title" value={video.title} />
       <br></br>
       <input type="text" name="view" onChange={handleChange} placeholder="views" value={video.view} />
       <br></br>
